@@ -19,39 +19,40 @@
  */
 
 const mainNavUl = document.getElementById("navbar__list");
-const section = document.querySelectorAll("section");
-let arr = [];
-section.forEach(element => {
-  const value = element.id;
-  arr.push(value);
+const mainNavLi = document.createElement("li");
+const sections = document.getElementsByTagName("section");
+
+let sectionId = [];
+
+// add child to parent
+function addChild(parent, child) {
+  parent.appendChild(child);
+}
+
+// Build menu
+/*
+ * This function check to see if there is a new section then add it to the page.
+ */
+window.addEventListener("load", function() {
+  for (let i = 0; i < sections.length; i++) {
+    const link = document.createElement("a");
+    link.href = `#${sections[i].id}`;
+    link.textContent = sections[i].dataset.nav;
+    link.classList = `menu__link`;
+    mainNavLi.appendChild(link);
+  }
+  addChild(mainNavUl, mainNavLi);
 });
-console.log(arr);
-const newElement = document.createElement("li");
-const link = document.createElement("a");
-// TODO: add a loop for nav
-link.setAttribute("href", "#" + arr[0]);
-link.textContent = "section";
-newElement.appendChild(link);
-
-/**
- * End Global Variables
- * Start Helper Functions
- *
- */
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
- */
-
-// build the nav
-const li = () => {
-  mainNavUl.appendChild(newElement);
-};
-mainNavUl.appendChild(newElement);
 
 // Add class 'active' to section when near top of viewport
+
+document.addEventListener("scroll", function() {
+  //   console.log(window.innerHeight);
+  for (let i = 0; i < sections.length; i++) {
+    if (sections[i].getBoundingClientRect().top < window.innerHeight) {
+    }
+  }
+});
 
 // Scroll to anchor ID using scrollTO event
 
@@ -61,8 +62,17 @@ mainNavUl.appendChild(newElement);
  *
  */
 
-// Build menu
-
 // Scroll to section on link click
+window.addEventListener("click", function() {
+  smoothScroll(event);
+});
 
-// Set sections as active
+function smoothScroll(event) {
+  // prevent the default action
+  event.preventDefault();
+  const targetId = event.target.getAttribute("href");
+  document.querySelector(targetId).scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
