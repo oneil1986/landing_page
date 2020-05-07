@@ -46,6 +46,7 @@ window.addEventListener("load", function() {
 });
 
 // helper function for check if section is in scroll view
+// https://gomakethings.com/how-to-test-if-an-element-is-in-the-viewport-with-vanilla-javascript/
 let bounding = element => {
   let rect = element.getBoundingClientRect();
   return (
