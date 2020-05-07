@@ -213,6 +213,11 @@ section.your-active-class {
   );
 }
 
+.active {
+  background: #45ff;
+  color: #fffffe;
+}
+
 section.your-active-class .landing__container::before {
   opacity: 1;
   animation: rotate 4s linear 0s infinite forwards;

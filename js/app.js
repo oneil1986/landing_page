@@ -21,8 +21,16 @@
 const mainNavUl = document.getElementById("navbar__list");
 const mainNavLi = document.createElement("li");
 const sections = document.getElementsByTagName("section");
+const divSections = document.getElementsByClassName("landing__container");
 
-let sectionId = [];
+// Create links
+function createLinks(names) {
+  const link = document.createElement("a");
+  link.href = `#${names.id}`;
+  link.textContent = names.dataset.nav;
+  link.classList = `menu__link`;
+  mainNavLi.appendChild(link);
+}
 
 // add child to parent
 function addChild(parent, child) {
@@ -30,40 +38,42 @@ function addChild(parent, child) {
 }
 
 // Build menu
-/*
- * This function check to see if there is a new section then add it to the page.
- */
 window.addEventListener("load", function() {
   for (let i = 0; i < sections.length; i++) {
-    const link = document.createElement("a");
-    link.href = `#${sections[i].id}`;
-    link.textContent = sections[i].dataset.nav;
-    link.classList = `menu__link`;
-    mainNavLi.appendChild(link);
+    createLinks(sections[i]);
   }
   addChild(mainNavUl, mainNavLi);
 });
 
 // Add class 'active' to section when near top of viewport
 
+let bounding = element => {
+  let rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
+
+/*
+ * Addeds a blue background to link when in view of section
+ */
 document.addEventListener("scroll", function() {
-  //   console.log(window.innerHeight);
-  for (let i = 0; i < sections.length; i++) {
-    if (sections[i].getBoundingClientRect().top < window.innerHeight) {
+  const highLight = document.getElementsByTagName("a");
+  for (let i = 0; i < highLight.length; i++) {
+    if (bounding(sections[i])) {
+      highLight[i].classList.add("active");
+    } else {
+      highLight[i].classList.remove("active");
     }
   }
 });
 
-// Scroll to anchor ID using scrollTO event
-
-/**
- * End Main Functions
- * Begin Events
- *
- */
-
 // Scroll to section on link click
-window.addEventListener("click", function() {
+document.addEventListener("click", function() {
   smoothScroll(event);
 });
 
