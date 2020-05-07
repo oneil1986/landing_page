@@ -45,8 +45,7 @@ window.addEventListener("load", function() {
   addChild(mainNavUl, mainNavLi);
 });
 
-// Add class 'active' to section when near top of viewport
-
+// helper function for check if section is in scroll view
 let bounding = element => {
   let rect = element.getBoundingClientRect();
   return (
@@ -59,7 +58,8 @@ let bounding = element => {
 };
 
 /*
- * Addeds a blue background to link when in view of section
+ * Addeds a blue background to link when in view of section.
+ * Add class 'active' to section when near top of viewport
  */
 document.addEventListener("scroll", function() {
   const highLight = document.getElementsByTagName("a");
@@ -77,6 +77,7 @@ document.addEventListener("click", function() {
   smoothScroll(event);
 });
 
+// helper function for smooth scroll
 function smoothScroll(event) {
   // prevent the default action
   event.preventDefault();
