@@ -49,13 +49,7 @@ window.addEventListener("load", function() {
 // https://gomakethings.com/how-to-test-if-an-element-is-in-the-viewport-with-vanilla-javascript/
 let bounding = element => {
   let rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
+  return rect.top <= 500 && rect.bottom >= 140;
 };
 
 /*
@@ -64,6 +58,7 @@ let bounding = element => {
  */
 document.addEventListener("scroll", function() {
   const highLight = document.getElementsByTagName("a");
+  const meadiaMatch = window.matchMedia("(max-width: 400px)");
   for (let i = 0; i < highLight.length; i++) {
     if (bounding(sections[i])) {
       highLight[i].classList.add("active");
