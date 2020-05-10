@@ -47,9 +47,9 @@ window.addEventListener("load", function() {
 
 // helper function for check if section is in scroll view
 // https://gomakethings.com/how-to-test-if-an-element-is-in-the-viewport-with-vanilla-javascript/
-let bounding = element => {
+let isInViewPort = element => {
   let rect = element.getBoundingClientRect();
-  return rect.top <= 500 && rect.bottom >= 140;
+  return rect.top <= 150 && rect.bottom >= 150;
 };
 
 /*
@@ -60,10 +60,12 @@ document.addEventListener("scroll", function() {
   const highLight = document.getElementsByTagName("a");
   const meadiaMatch = window.matchMedia("(max-width: 400px)");
   for (let i = 0; i < highLight.length; i++) {
-    if (bounding(sections[i])) {
+    if (isInViewPort(sections[i])) {
       highLight[i].classList.add("active");
+      sections[i].classList.add("your-active-class");
     } else {
       highLight[i].classList.remove("active");
+      sections[i].classList.remove("your-active-class");
     }
   }
 });
