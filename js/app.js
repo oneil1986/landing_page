@@ -55,6 +55,7 @@ let isInViewPort = element => {
 /*
  * Addeds a blue background to link when in view of section.
  * Add class 'active' to section when near top of viewport
+ * also a background color
  */
 document.addEventListener("scroll", function() {
   const highLight = document.getElementsByTagName("a");
